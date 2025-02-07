@@ -1,0 +1,61 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# build outputs
+/build
+/dist
+/dist-ssr
+
+# misc
+.DS_Store
+*.pem
+.env*.local
+
+# logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# IDE files
+.vscode/*
+!.vscode/extensions.json
+*.sublime-project
+*.sublime-workspace
+.idea
+*.iml
+*.swp
+*.swo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# eslint
+.eslintcache
+
+# folders used for gulp output
+/public2
+/inject2

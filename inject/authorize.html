@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Dev SSO IdP</title>
+        <style>
+            /*NORMALIZE_CSS_GOES_HERE*/
+        </style>
+        <style>
+            /*STYLES_CSS_GOES_HERE*/
+        </style>
+        <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <script src="/config.js" defer></script>
+        <script src="/settingsInit.js" defer></script>
+        <script src="/commonLogic.js" defer></script>
+        <script src="/setupEnvVars.js" defer></script>
+        <script src="/setupRequestParams.js" defer></script>
+        <script src="/errorsAndWarnings.js" defer></script>
+        <script src="/redirectInit.js" defer></script>
+        <script src="/getCode.js" defer></script>
+        <script src="/buttonBehavior.js" defer></script>
+        <script src="/themeHandler.js" defer></script>
+        <script src="/settingsBehavior.js" defer></script>
+        <script src="/settingsCollapsible.js" defer></script>
+    </head>
+    <body>
+        <article class="flexCenterColumn">
+            <header>
+                <h1 class="mainTitle">Dev SSO IdP</h1>
+            </header>
+            <div class="simulatorContainer flexCenterColumn">
+                <div id="simulatorLoadingSpinner" class="loadingSpinner mt2rem"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                <div id="simulatorContent" class="simulatorContent flexCenterColumn hidden">
+                    <div id="envVarErrorsContainer" class="errorContainer errorContainerColor pr2rem pb07rem mb1rem hidden">
+                        <div class="errorHeader flexRow alignItemsCenter">
+                            <svg class="errorIcon errorIconColor"  xmlns="http://www.w3.org/2000/svg"  width="36"  height="36"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-exclamation-circle"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M12 9v4" /><path d="M12 16v.01" /></svg>
+                            <div class="pl05rem">The following problems exist in this SSO server's environment variables:</div>
+                        </div>
+                        <ul id="envVarErrorsList">
+                        </ul>
+                    </div>
+                    <p class="pText">
+                        The purpose of this page is to assist you in the development of
+                        frontend UIs that authenticate with Single Sign-On (SSO).
+                        Configure your local- or dev-environment application to redirect to this page
+                        when it needs to authenticate a user. Then you can simulate what
+                        happens by clicking one of the below buttons.
+                    </p>
+                    <div id="requestParamErrorsContainer" class="errorContainer errorContainerColor pr2rem pb07rem mb1rem hidden">
+                        <div class="errorHeader flexRow alignItemsCenter">
+                            <svg class="errorIcon errorIconColor"  xmlns="http://www.w3.org/2000/svg"  width="36"  height="36"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-exclamation-circle"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M12 9v4" /><path d="M12 16v.01" /></svg>
+                            <div class="pl05rem">The following problems exist in the parameters in the URL of the request for this page:</div>
+                        </div>
+                        <ul id="requestParamErrorsList">
+                        </ul>
+                    </div>
+                    <div id="codeErrorContainer" class="errorContainer errorContainerColor pr2rem pb07rem mb1rem hidden">
+                        <div class="errorHeader flexRow alignItemsCenter">
+                            <svg class="errorIcon errorIconColor"  xmlns="http://www.w3.org/2000/svg"  width="36"  height="36"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-exclamation-circle"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M12 9v4" /><path d="M12 16v.01" /></svg>
+                            <div class="pl05rem">There has been an error in fetching the authorization code. This may be fixed by reloading this page.</div>
+                        </div>
+                    </div>
+                    <section class="flexCenterColumn simSection">
+                        <label>Which outcome do you want to simulate?</label>
+                        <button
+                            id="succeedButton"
+                            class="displayBlock simButton simButtonBlue"
+                        >
+                            User successfully authenticates
+                        </button>
+                        <button
+                            id="failButton"
+                            class="displayBlock simButton simButtonRed"
+                        >
+                            User fails authentication
+                        </button>
+                    </section>
+                    <div class="settingsCollapsibleContainer flexCenterColumn mt1_5rem">
+                        <div id="settingsCollapseButton" class="settingsCollapseButton">
+                            <div id="collapseIconContainer" class="collapseIconContainer collapseIconContainerRotateRight"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-triangle"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 1.67a2.914 2.914 0 0 0 -2.492 1.403l-8.11 13.537a2.914 2.914 0 0 0 2.484 4.385h16.225a2.914 2.914 0 0 0 2.503 -4.371l-8.116 -13.546a2.917 2.917 0 0 0 -2.494 -1.408z" /></svg></div>
+                            <span class="ml_2rem">Advanced Settings</span>
+                        </div>
+                        <div id="settingsCollapsibleContent" class="hidden">
+                            SETTING_INPUTS_GO_HERE
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </body>
+</html>

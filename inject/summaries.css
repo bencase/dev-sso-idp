@@ -1,0 +1,43 @@
+.summariesColumn {
+    max-width: 75ch;
+}
+
+.summary {
+}
+
+.summaryEnvVar {
+}
+
+.summaryEnvVarName {
+    font-weight: 700;
+}
+
+.summaryEnvVarValue {
+    text-wrap: wrap;
+    word-wrap: break-word;
+    line-height: 1.7;
+}
+
+.summary .errorContainer {
+    box-sizing: border-box;
+    width: 100%;
+    overflow: hidden;
+}
+
+.summaryErrorText {
+    line-height: 1.7;
+}
+
+.summaryError {
+    background-color: #b00000;
+}
+body.light .summaryError {
+    background-color: #ffe9e9;
+}
+
+.summaryWarning {
+    background-color: #b07000;
+}
+body.light .summaryWarning {
+    background-color: #fff7e1;
+}

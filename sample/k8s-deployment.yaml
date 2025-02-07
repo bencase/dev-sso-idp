@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dev-sso-idp-dep
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      podLabel: dev-sso-idp-pod
+  template:
+    metadata:
+      name: dev-sso-idp-pod
+      labels:
+        app: dev-sso-idp
+        component: dev-sso-idp
+        podLabel: dev-sso-idp-pod
+    spec:
+      containers:
+      - name: dev-sso-idp-container
+        image: bmcase/devssoidp:1.0.0
+        startupProbe:
+          httpGet:
+            path: /api/v1/health/env
+            port: 3000
+          periodSeconds: 5
+          failureThreshold: 10
+        livenessProbe:
+          httpGet:
+            path: /api/v1/health
+            port: 3000
+          periodSeconds: 30
+          failureThreshold: 5
+        readinessProbe:
+          httpGet:
+            path: /api/v1/health
+            port: 3000
+          periodSeconds: 30
+          failureThreshold: 1
+        env:
+        - name: DEVSSOIDP_PERCENT_ENCODED_REDIRECT_URIS
+          value: http%3A%2F%2Flocalhost%3A5173,http%3A%2F%2Flocalhost%3A8080
+        - name: DEVSSOIDP_CLIENT_IDS
+          value: relying_party,my_cool_app
+        - name: DEVSSOIDP_CLIENT_IDS_WITH_SECRETS
+          value: relying_party:bnhFJWV2HPIHNiOh+cC796BXAgjbWl8VJAPca4V5K1U=,my_cool_app:QjbYa8VlKM3yBzPwKibD3kaNmTJdfbNloDagTryV1WQ=
+        - name: DEVSSOIDP_SALTS_FOR_HASHING_SECRET
+          value: my-super-cool-salt,my-other-almost-as-cool-salt
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dev-sso-idp-svc
+  labels:
+    app: dev-sso-idp
+spec:
+  ports:
+  - port: 3000
+  selector:
+    component: dev-sso-idp

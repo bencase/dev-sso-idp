@@ -1,0 +1,57 @@
+<div class="settingsColumn flexLeftAlignedColumn">
+    <section class="settingsSection mt1rem">
+        <div>
+            <label>Theme:</label>
+            <input id="themeLightInput" type="radio" name="theme" value="light" /><label>Light</label>
+            <input id="themeDarkInput" type="radio" name="theme" value="dark" /><label>Dark</label>
+            <input id="themeSystemDefaultInput" type="radio" name="theme" value="sys" /><label>System Default</label>
+        </div>
+    </section>
+    <section class="settingsSection mt1rem">
+        <div>
+            <input id="autoRedirectAfterLoadInput" type="checkbox" />
+            <label>Auto-redirect after load</label>
+        </div>
+        <small class="pText settingInputCaption">
+            This will automatically redirect the page after the page loads. The value here may be overridden by adding the "auto_redirect" request parameter in the URL, and setting it to either "y" (if you want to auto-redirect) or "n" (if you don't).SETTINGS_LINK_GOES_HERE
+        </small>
+    </section>
+    <section class="settingsSection mt1rem">
+        <div>
+            <input id="failWhenAutoRedirectingInput" type="checkbox" />
+            <label>Fail when auto-redirecting?</label>
+        </div>
+        <small class="pText settingInputCaption">
+            This will cause any auto-redirects to fail, with the error and (optionally) error message defined by the below settings.
+        </small>
+    </section>
+    <section class="settingsSection mt1rem">
+        <div>
+            <label>Error:</label>
+            <input id="errorInput" class="textInput" type="text" />
+        </div>
+        <small class="pText settingInputCaption">
+            The value of the "error" parameter when this page redirects with a failure. If none is supplied, it defaults to "access_denied".
+        </small>
+    </section>
+    <section class="settingsSection mt1rem">
+        <div>
+            <label>Error Description:</label>
+            <input id="errorDescInput" class="textInput" type="text" />
+        </div>
+        <small class="pText settingInputCaption">
+            The value of the "error_description" parameter when this page redirects with a failure. If none is supplied this parameter will be omitted.
+        </small>
+    </section>
+    <section class="settingsSection mt1rem">
+        <div>
+            <label>Loading delay (ms):</label>
+            <input id="loadingDelayInput" class="textInput" type="number" min="0" step="100" />
+        </div>
+        <small class="pText settingInputCaption">
+            This will apply an extra delay during page load. Depending on how and where this server is setup, there may be very little latency, and the page may load almost instantly. But this might not be the case with your production OIDC provider. So, in order to establish expectations that there will be a load time, you may wish to use this setting to set an extra load time in this OIDC environment.
+            <br><br>
+            The value here may be overridden by adding the "loading_delay" request parameter in the URL, and setting it to either 0 or the desired number of milliseconds to delay.
+        </small>
+    </section>
+</div>
