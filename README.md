@@ -281,7 +281,7 @@ This method is the same as the previous in terms of how the request is sent to t
     -   Include all client ID/hash pairs in `DEVSSOIDP_CLIENT_IDS_WITH_SECRETS`, separated by commas.
     -   Use a different salt for each secret, and include each salt in `DEVSSOIDP_SALTS_FOR_HASHING_SECRET`, again separated by commas. The first salt in this environment variable should correspond to the first client ID/hash pair in `DEVSSOIDP_CLIENT_IDS_WITH_SECRETS`, and so on.
 
-Note that you only need to hash the secret for purpose of populating the `DEVSSOIDP_CLIENT_IDS_WITH_SECRETS` environment variable. The token endpoint request's Authorization header should be constructed as mentioned in the previous method, using the unhashed secret. When the endpoint is validating the Authorization header, it will hash the provided secret and check it against the hash provided in the environment variable, and denying authorization if they don't match. In this way, Basic Auth may be used without the secret being stored
+Note that you only need to hash the secret for purpose of populating the `DEVSSOIDP_CLIENT_IDS_WITH_SECRETS` environment variable. The token endpoint request's Authorization header should be constructed as mentioned in the previous method, using the unhashed secret. When the endpoint is validating the Authorization header, it will hash the provided secret and check it against the hash provided in the environment variable, and denying authorization if they don't match. In this way, Basic Auth may be used without the secret being stored.
 
 ## Degree of similitude with OpenID Connect providers
 
