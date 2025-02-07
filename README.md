@@ -6,7 +6,7 @@
         <span> - </span>
         <a href="#environment-variable-reference">Environment variable reference</a>
     </span>
-    <img src="https://github.com/user-attachments/assets/462bdfa2-2ebe-460c-9b13-bd8d26e2cd2e" alt="A screencap of the Dev SSO IdP authorization page." width="768">
+    <img src="https://github.com/user-attachments/assets/dafe4d0c-4e89-4e79-bda7-8af7797b92ea" alt="A screencap of the Dev SSO IdP authorization page." width="768">
 </div>
 
 Dev SSO IdP is a mock single sign-on (SSO) server you can use to ensure your application's compatibility with your production SSO, without actually needing to use your production SSO during development.
@@ -25,7 +25,7 @@ Dev SSO IdP follows the Open ID Connect (OIDC) specification, which is a very co
 
 Dev SSO IdP fills in for the "third party" in your local and development environments.
 
-<img src="https://github.com/user-attachments/assets/02d19373-1641-4b97-b888-6f4035079bf4" alt="A visual breakdown of the steps of Dev SSO IdP's basic flow, the details of which are explained more in the remainder of this quick start guide.">
+<img src="https://github.com/user-attachments/assets/673ced53-00a6-4979-ae9d-940d9ba5ac12" alt="A visual breakdown of the steps of Dev SSO IdP's basic flow, the details of which are explained more in the remainder of this quick start guide.">
 
 ## Quick start guide
 
@@ -82,7 +82,7 @@ To start Dev SSO IdP:
 
 In the part of your application's code that handles SSO, you'll need to make changes to ensure the URL it directs users to is correct.
 
-<img src="https://github.com/user-attachments/assets/25a58eb4-71d0-40f5-9c00-fbfd1fc4a24b" alt="An example /authorize URL, and breakdown of its request parameters.">
+<img src="https://github.com/user-attachments/assets/2c7b97a1-743d-4095-a703-769060263912" alt="An example /authorize URL, and breakdown of its request parameters.">
 
 The URL will follow this pattern (line wraps for display purposes only):
 
