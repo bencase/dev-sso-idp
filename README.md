@@ -45,14 +45,7 @@ This option will assume you have Node. You'll also either need to have git insta
 git clone https://github.com/bencase/dev-sso-idp.git
 ```
 
-Once you have the project code, there are a couple environment variables you will need to configure. Create a file called `.production.env`. You'll add environment variables to this file, with one variable per line, in the format `<ENV_VAR_NAME>=<VALUE>`. For example:
-
-```
-DEVSSOIDP_PERCENT_ENCODED_REDIRECT_URIS=http%3A%2F%2Flocalhost%3A5173,http%3A%2F%2Flocalhost%3A8080
-DEVSSOIDP_CLIENT_IDS=my_cool_app,my_other_cool_app
-```
-
-Proceed to the next section, which discusses these variables in more detail.
+Once you have the project code, there are a couple environment variables you will need to configure. Create a file called `.production.env` and proceed to the next section, which discusses these variables in more detail.
 
 ### Configuring environment variables
 
@@ -69,6 +62,13 @@ Dev SSO IdP is configured entirely through environment variables. Almost all of 
 
 The above describes the minimum amount of environment variables needed. Further environment variables are described in the "Environment variable reference" section below.
 
+In the file you created for your environment variables, add them, one variable per line, in the format `<ENV_VAR_NAME>=<VALUE>`. For example:
+
+```
+DEVSSOIDP_PERCENT_ENCODED_REDIRECT_URIS=http%3A%2F%2Flocalhost%3A5173,http%3A%2F%2Flocalhost%3A8080
+DEVSSOIDP_CLIENT_IDS=my_cool_app,my_other_cool_app
+```
+
 Once you've specified your environment variables, you'll be ready to start the Dev SSO IdP server.
 
 ### Starting Dev SSO IdP
@@ -84,7 +84,7 @@ In the part of your application's code that handles SSO, you'll need to make cha
 
 <img src="https://github.com/user-attachments/assets/2c7b97a1-743d-4095-a703-769060263912" alt="An example /authorize URL, and breakdown of its request parameters.">
 
-The URL will follow this pattern (line wraps for display purposes only):
+The URL should follow this pattern (line wraps for display purposes only):
 
 ```
 <http-or-https>://<dev-sso-idp-host-and-port>/authorize
