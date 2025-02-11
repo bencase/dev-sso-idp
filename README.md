@@ -25,7 +25,7 @@ Dev SSO IdP follows the Open ID Connect (OIDC) specification, which is a very co
 
 Dev SSO IdP fills in for the "third party" in your local and development environments.
 
-<img src="https://github.com/user-attachments/assets/673ced53-00a6-4979-ae9d-940d9ba5ac12" alt="A visual breakdown of the steps of Dev SSO IdP's basic flow, the details of which are explained more in the remainder of this quick start guide.">
+<img src="https://github.com/user-attachments/assets/4b5283e8-d54d-46bf-96a5-171b0dffae34" alt="A visual breakdown of the steps of Dev SSO IdP's basic flow, the details of which are explained more in the remainder of this quick start guide.">
 
 ## Quick start guide
 
