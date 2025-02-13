@@ -8,7 +8,7 @@
     },
     "main": "app.js",
     "scripts": {
-        "start": "node --env-file=.env --env-file-if-exists=.production.env src/app.js",
+        "start": "node --env-file=.env --env-file=.production.env src/app.js",
         "dev": "NODE_ENV=development nodemon --env-file=.env --env-file=.development.env src/app.js",
         "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
         "prepare": "husky install",
