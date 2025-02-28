@@ -53,7 +53,7 @@ Dev SSO IdP is configured entirely through environment variables. Almost all of 
 
 -   **`DEVSSOIDP_PERCENT_ENCODED_REDIRECT_URIS`:** This is the URL or URLs of applications that will redirect to Dev SSO IdP for authentication.
 
-    -   For example, if you're running your application locally on port 5173, the host to use would be `http://localhost:5173`. This environment variable's value must be percent-encoded, for which you may use [an online tool](https://www.url-encode-decode.com/). The encoded value in this example would be `http%3A%2F%2Flocalhost%3A5173`.
+    -   For example, if you're running your application locally on port 5173, the host to use would be `http://localhost:5173`. This environment variable's value must be percent-encoded, for which you may use [an online tool](https://www.urlencoder.org/). The encoded value in this example would be `http%3A%2F%2Flocalhost%3A5173`.
 
 -   **Either `DEVSSOIDP_CLIENT_IDS` or `DEVSSOIDP_CLIENT_IDS_WITH_SECRETS`:** Use the first of these if all you want to specify is client IDs. Use the second to define client ID/secret pairs if you want your app to use basic auth when getting tokens. For more info on this topic, see the below section, "Client authentication with the token endpoint".
     -   A client ID is a string of text that the IdP uses to identify your application. It can be any arbitrary text of your choosing so long as it doesn't contain any commas (",") or colons (":"), which these fields use as delimiters.
