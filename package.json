@@ -1,6 +1,6 @@
 {
     "name": "dev-sso-idp",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A dev SSO IdP with a redirect page and backend server.",
     "type": "module",
     "engines": {

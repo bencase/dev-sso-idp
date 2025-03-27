@@ -10,6 +10,7 @@ export class RouteParams {
     mustCheckClientId = false;
     includeExpiresInInTokenResponse = false;
     enableRefreshTokens = false;
+    excludeUserInfoFromIdToken = false;
 }
 
 export const getRouteParams = (envVarHolder) => {
@@ -40,5 +41,8 @@ export const getRouteParams = (envVarHolder) => {
         'true';
     routeParams.enableRefreshTokens =
         String(envVarHolder.enableRefreshTokens).toLowerCase() === 'true';
+    routeParams.excludeUserInfoFromIdToken =
+        String(envVarHolder.excludeUserInfoFromIdToken).toLowerCase() ===
+        'true';
     return routeParams;
 };

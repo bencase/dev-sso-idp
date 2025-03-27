@@ -1,47 +1,16 @@
 import { checkCode, getScopesFromCode } from '../codeManagement.js';
 import { accessDeniedWithLog } from '../commonLogic.js';
-import { correlationIdHeader, logLevelWarn } from '../constants.js';
+import {
+    addressInfo,
+    correlationIdHeader,
+    emailInfo,
+    logLevelWarn,
+    phoneInfo,
+    profileInfo,
+} from '../constants.js';
 import { createLogger } from '../loggerManager.js';
 
 const logger = createLogger('userInfo');
-
-const profileInfo = {
-    name: 'Test User',
-    family_name: 'User',
-    given_name: 'Test',
-    middle_name: 'Em',
-    nickname: 'Testy',
-    preferred_username: 'tuser',
-    profile: 'https://example.com/user/tuser/profile.html',
-    photo: 'https://example.com/user/tuser/image.jpg',
-    website: 'https://example-tuser.com',
-    gender: 'female',
-    birthdate: '1970-01-01',
-    zoneinfo: 'America/Chicago',
-    locale: 'en-US',
-    updated_at: 1728929831,
-};
-
-const emailInfo = {
-    email: 'tuser@example.com',
-    email_verified: true,
-};
-
-const addressInfo = {
-    address: {
-        formatted: '248 Live Oak Lane\nAustin, TX 78787\nUnited States',
-        street_address: '248 Live Oak Lane',
-        locality: 'Austin',
-        region: 'TX',
-        postal_code: '78787',
-        country: 'United States',
-    },
-};
-
-const phoneInfo = {
-    phone_number: '+1 (555) 555-5555',
-    phone_number_verified: true,
-};
 
 const scopeInfo = {
     profile: profileInfo,

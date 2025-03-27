@@ -26,13 +26,13 @@ import { createConfigJsTransform } from './transforms/configJsTransform.js';
 import { createHtmlTransform } from './transforms/htmlTransform.js';
 import { createSummariesTransform } from './transforms/summariesTransform.js';
 import { validateValues } from './validateEnvVars.js';
+import { IdTokenFieldNames } from './tokenManagement.js';
 
 const configJsPath = '/config.js';
 
 const logger = createLogger('app');
 
 const envVarHolder = getEnvVarHolder();
-
 const authorizePagePath = envVarHolder.authorizePagePath || '/authorize';
 const settingsPagePath = envVarHolder.settingsPagePath || '/settings';
 const environmentPagePath = envVarHolder.environmentPagePath || '/environment';
@@ -44,6 +44,18 @@ const basicHealthCheckEndpointPath =
     envVarHolder.healthCheckEndpointPath || '/api/v1/health';
 const envHealthCheckEndpointPath =
     envVarHolder.healthCheckEnvEndpointPath || '/api/v1/health/env';
+
+const idTokenFieldNames = new IdTokenFieldNames();
+idTokenFieldNames.nameField = envVarHolder.idTokenNameField || 'name';
+idTokenFieldNames.usernameField =
+    envVarHolder.idTokenUsernameField || 'preferred_username';
+idTokenFieldNames.firstNameField =
+    envVarHolder.idTokenFirstNameField || 'given_name';
+idTokenFieldNames.middleNameField =
+    envVarHolder.idTokenMiddleNameField || 'middle_name';
+idTokenFieldNames.lastNameField =
+    envVarHolder.idTokenLastNameField || 'family_name';
+idTokenFieldNames.emailField = envVarHolder.idTokenEmailField || 'email';
 
 const envVarsValidationResult = (() => {
     try {
@@ -167,7 +179,7 @@ app.use(express.urlencoded());
 
 app.get(codeEndpointPath, makeCodeRoute(routeParams));
 
-app.post(tokenEndpointPath, makeTokenRoute(routeParams));
+app.post(tokenEndpointPath, makeTokenRoute(routeParams, idTokenFieldNames));
 
 app.get(userInfoEndpointPath, makeUserInfoRoute());
 

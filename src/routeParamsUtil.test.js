@@ -22,6 +22,7 @@ const envVarHolder = {
     redirectUriOptionalForTokenEndpoint: 'false',
     clientIdOptionalForTokenEndpoint: 'false',
     enableRefreshTokens: 'true',
+    excludeUserInfoFromIdToken: 'false',
     logLevel: 'info',
     authorizePagePath: '/authorize',
     settingsPagePath: '/settings',

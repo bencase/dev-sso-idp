@@ -27,6 +27,13 @@ import {
     HEALTH_CHECK_ENDPOINT_PATH_ENV_VAR,
     HEALTH_CHECK_ENV_ENDPOINT_PATH_ENV_VAR,
     ENABLE_REFRESH_TOKENS_ENV_VAR,
+    EXCLUDE_USER_INFO_FROM_ID_TOKEN_ENV_VAR,
+    ID_TOKEN_NAME_FIELD_ENV_VAR,
+    ID_TOKEN_USERNAME_FIELD_ENV_VAR,
+    ID_TOKEN_FIRST_NAME_FIELD_ENV_VAR,
+    ID_TOKEN_MIDDLE_NAME_FIELD_ENV_VAR,
+    ID_TOKEN_LAST_NAME_FIELD_ENV_VAR,
+    ID_TOKEN_EMAIL_FIELD_ENV_VAR,
 } from './constants.js';
 import { getEnvVarHolder } from './envVarUtil';
 
@@ -61,6 +68,13 @@ describe('src/envVarUtil.js', () => {
         process.env[REDIRECT_URI_OPTIONAL_FOR_TOKEN_ENDPOINT_ENV_VAR] = 'true';
         process.env[CLIENT_ID_OPTIONAL_FOR_TOKEN_ENDPOINT_ENV_VAR] = 'true';
         process.env[ENABLE_REFRESH_TOKENS_ENV_VAR] = 'true';
+        process.env[EXCLUDE_USER_INFO_FROM_ID_TOKEN_ENV_VAR] = 'false';
+        process.env[ID_TOKEN_NAME_FIELD_ENV_VAR] = 'name';
+        process.env[ID_TOKEN_USERNAME_FIELD_ENV_VAR] = 'preferred_username';
+        process.env[ID_TOKEN_FIRST_NAME_FIELD_ENV_VAR] = 'given_name';
+        process.env[ID_TOKEN_MIDDLE_NAME_FIELD_ENV_VAR] = 'middle_name';
+        process.env[ID_TOKEN_LAST_NAME_FIELD_ENV_VAR] = 'family_name';
+        process.env[ID_TOKEN_EMAIL_FIELD_ENV_VAR] = 'email';
         process.env[LOG_LEVEL_ENV_VAR] = 'debug';
         process.env[AUTHORIZE_PAGE_PATH_ENV_VAR] = '/api/v1/authorize';
         process.env[SETTINGS_PAGE_PATH_ENV_VAR] = '/api/v1/settings';
@@ -95,6 +109,13 @@ describe('src/envVarUtil.js', () => {
         expect(evHolder.redirectUriOptionalForTokenEndpoint).toBe('true');
         expect(evHolder.clientIdOptionalForTokenEndpoint).toBe('true');
         expect(evHolder.enableRefreshTokens).toBe('true');
+        expect(evHolder.excludeUserInfoFromIdToken).toBe('false');
+        expect(evHolder.idTokenNameField).toBe('name');
+        expect(evHolder.idTokenUsernameField).toBe('preferred_username');
+        expect(evHolder.idTokenFirstNameField).toBe('given_name');
+        expect(evHolder.idTokenMiddleNameField).toBe('middle_name');
+        expect(evHolder.idTokenLastNameField).toBe('family_name');
+        expect(evHolder.idTokenEmailField).toBe('email');
         expect(evHolder.logLevel).toBe('debug');
         expect(evHolder.authorizePagePath).toBe('/api/v1/authorize');
         expect(evHolder.settingsPagePath).toBe('/api/v1/settings');
