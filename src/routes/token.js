@@ -242,178 +242,183 @@ const performCredentialsCheck = (
     }
 };
 
-export const makeTokenRoute = (routerParams) => (req, res) => {
-    const {
-        clientIdsStr,
-        clientIdsWithSecretsStr,
-        issuer,
-        idTokenExpirationSeconds,
-        salts,
-        mustUseCredentials,
-        mustHashSecret,
-        mustCheckRedirectUri,
-        mustCheckClientId,
-        includeExpiresInInTokenResponse,
-        enableRefreshTokens,
-    } = routerParams;
-
-    const correlationId = req.header(correlationIdHeader);
-    let credentials = '';
-    if (mustUseCredentials) {
-        credentials = req.header('Authorization');
-    }
-    const grantType = req.body.grant_type;
-    const code = req.body.code;
-    const refreshToken = req.body.refresh_token;
-    const redirectUri = req.body.redirect_uri;
-    const scopesStr = req.body.scope;
-    let clientId = req.body.client_id;
-
-    const shouldUseRefreshToken = useRefreshTokenInsteadOfCode(
-        refreshToken,
-        enableRefreshTokens
-    );
-
-    const validationProblems = validateTokenRouteRequestBodyProperties(
-        grantType,
-        code,
-        refreshToken,
-        redirectUri,
-        clientId,
-        mustUseCredentials,
-        mustCheckRedirectUri,
-        mustCheckClientId,
-        enableRefreshTokens
-    );
-    if (validationProblems.length > 0) {
-        const message = `Request is invalid: ${validationProblems}`;
-        logger.warn(message, { correlationId: correlationId });
-        res.status(400).json({
-            message: message,
-        });
-        return;
-    }
-
-    // Check credentials
-    if (mustUseCredentials) {
-        let credentialsCheckPassed;
-        [credentialsCheckPassed, clientId] = performCredentialsCheck(
-            credentials,
+export const makeTokenRoute =
+    (routerParams, idTokenFieldNames) => (req, res) => {
+        const {
             clientIdsStr,
             clientIdsWithSecretsStr,
-            mustHashSecret,
+            issuer,
+            idTokenExpirationSeconds,
             salts,
-            correlationId,
-            res
+            mustUseCredentials,
+            mustHashSecret,
+            mustCheckRedirectUri,
+            mustCheckClientId,
+            includeExpiresInInTokenResponse,
+            enableRefreshTokens,
+            excludeUserInfoFromIdToken,
+        } = routerParams;
+
+        const correlationId = req.header(correlationIdHeader);
+        let credentials = '';
+        if (mustUseCredentials) {
+            credentials = req.header('Authorization');
+        }
+        const grantType = req.body.grant_type;
+        const code = req.body.code;
+        const refreshToken = req.body.refresh_token;
+        const redirectUri = req.body.redirect_uri;
+        const scopesStr = req.body.scope;
+        let clientId = req.body.client_id;
+
+        const shouldUseRefreshToken = useRefreshTokenInsteadOfCode(
+            refreshToken,
+            enableRefreshTokens
         );
-        if (!credentialsCheckPassed) {
+
+        const validationProblems = validateTokenRouteRequestBodyProperties(
+            grantType,
+            code,
+            refreshToken,
+            redirectUri,
+            clientId,
+            mustUseCredentials,
+            mustCheckRedirectUri,
+            mustCheckClientId,
+            enableRefreshTokens
+        );
+        if (validationProblems.length > 0) {
+            const message = `Request is invalid: ${validationProblems}`;
+            logger.warn(message, { correlationId: correlationId });
+            res.status(400).json({
+                message: message,
+            });
             return;
         }
-    }
 
-    // Check code or refresh token (Note: the code check implicitly checks whether the redirect URI and client ID were the same as used when getting the code)
-    const isCodeOrRefreshTokenValid = (() => {
-        if (shouldUseRefreshToken) {
-            return checkCode(
-                refreshToken,
-                undefined,
-                clientId,
-                false,
-                mustCheckClientId
-            );
-        } else {
-            return checkCode(
-                code,
-                redirectUri,
-                clientId,
-                mustCheckRedirectUri,
-                mustCheckClientId
-            );
-        }
-    })();
-    if (!isCodeOrRefreshTokenValid) {
-        if (shouldUseRefreshToken) {
-            accessDeniedWithLog(
-                logger,
-                logLevelWarn,
-                `Refresh token not valid for authentication attempt with client ID ${clientId}`,
-                { correlationId: correlationId },
+        // Check credentials
+        if (mustUseCredentials) {
+            let credentialsCheckPassed;
+            [credentialsCheckPassed, clientId] = performCredentialsCheck(
+                credentials,
+                clientIdsStr,
+                clientIdsWithSecretsStr,
+                mustHashSecret,
+                salts,
+                correlationId,
                 res
             );
-            return;
-        } else {
-            accessDeniedWithLog(
-                logger,
-                logLevelWarn,
-                `Code not valid for authentication attempt with client ID ${clientId}`,
-                { correlationId: correlationId },
-                res
-            );
-            return;
-        }
-    }
-
-    // Get scopes
-    const scopes = (() => {
-        if (shouldUseRefreshToken) {
-            let scopesList = getScopesFromCode(refreshToken);
-            // If the request body includes scopes, then the scopes for tokens returned by this endpoint
-            // should include only scopes that are in both the refresh token and the request body.
-            if (scopesStr) {
-                let reqBodyScopesList =
-                    getScopeListFromSpaceDelimitedString(scopesStr);
-                if (reqBodyScopesList.length > 0) {
-                    scopesList = scopesList.filter((scope) =>
-                        reqBodyScopesList.includes(scope)
-                    );
-                }
+            if (!credentialsCheckPassed) {
+                return;
             }
-            return scopesList;
-        } else {
-            return getScopesFromCode(code);
         }
-    })();
 
-    // Create response body
-    const responseBody = {
-        access_token: getAccessToken(scopes),
-        token_type: idTokenType,
+        // Check code or refresh token (Note: the code check implicitly checks whether the redirect URI and client ID were the same as used when getting the code)
+        const isCodeOrRefreshTokenValid = (() => {
+            if (shouldUseRefreshToken) {
+                return checkCode(
+                    refreshToken,
+                    undefined,
+                    clientId,
+                    false,
+                    mustCheckClientId
+                );
+            } else {
+                return checkCode(
+                    code,
+                    redirectUri,
+                    clientId,
+                    mustCheckRedirectUri,
+                    mustCheckClientId
+                );
+            }
+        })();
+        if (!isCodeOrRefreshTokenValid) {
+            if (shouldUseRefreshToken) {
+                accessDeniedWithLog(
+                    logger,
+                    logLevelWarn,
+                    `Refresh token not valid for authentication attempt with client ID ${clientId}`,
+                    { correlationId: correlationId },
+                    res
+                );
+                return;
+            } else {
+                accessDeniedWithLog(
+                    logger,
+                    logLevelWarn,
+                    `Code not valid for authentication attempt with client ID ${clientId}`,
+                    { correlationId: correlationId },
+                    res
+                );
+                return;
+            }
+        }
+
+        // Get scopes
+        const scopes = (() => {
+            if (shouldUseRefreshToken) {
+                let scopesList = getScopesFromCode(refreshToken);
+                // If the request body includes scopes, then the scopes for tokens returned by this endpoint
+                // should include only scopes that are in both the refresh token and the request body.
+                if (scopesStr) {
+                    let reqBodyScopesList =
+                        getScopeListFromSpaceDelimitedString(scopesStr);
+                    if (reqBodyScopesList.length > 0) {
+                        scopesList = scopesList.filter((scope) =>
+                            reqBodyScopesList.includes(scope)
+                        );
+                    }
+                }
+                return scopesList;
+            } else {
+                return getScopesFromCode(code);
+            }
+        })();
+
+        // Create response body
+        const responseBody = {
+            access_token: getAccessToken(scopes),
+            token_type: idTokenType,
+        };
+        if (includeExpiresInInTokenResponse) {
+            responseBody['expires_in'] = idTokenExpirationSeconds;
+        }
+        if (enableRefreshTokens) {
+            responseBody['refresh_token'] = getRefreshToken(clientId, scopes);
+        }
+
+        // Get nonce (which is optional, so this might be an empty string)
+        const nonce = (() => {
+            if (shouldUseRefreshToken) {
+                return '';
+            } else {
+                return getNonceFromCode(code);
+            }
+        })();
+
+        // Create token
+        const tokenPromise = getIdToken(
+            issuer,
+            clientId,
+            idTokenExpirationSeconds,
+            scopes,
+            excludeUserInfoFromIdToken,
+            idTokenFieldNames,
+            nonce
+        );
+        tokenPromise.then(
+            (token) => {
+                responseBody['id_token'] = token;
+                res.json(responseBody);
+            },
+            (rejectedReason) => {
+                logger.error(`ID token promise rejected: ${rejectedReason}`, {
+                    correlationId: correlationId,
+                });
+                res.status(500).json({
+                    message: `Token generation has failed due to an internal error. The logs may contain more info.`,
+                });
+            }
+        );
     };
-    if (includeExpiresInInTokenResponse) {
-        responseBody['expires_in'] = idTokenExpirationSeconds;
-    }
-    if (enableRefreshTokens) {
-        responseBody['refresh_token'] = getRefreshToken(clientId, scopes);
-    }
-
-    // Get nonce (which is optional, so this might be an empty string)
-    const nonce = (() => {
-        if (shouldUseRefreshToken) {
-            return '';
-        } else {
-            return getNonceFromCode(code);
-        }
-    })();
-
-    // Create token
-    const tokenPromise = getIdToken(
-        issuer,
-        clientId,
-        idTokenExpirationSeconds,
-        nonce
-    );
-    tokenPromise.then(
-        (token) => {
-            responseBody['id_token'] = token;
-            res.json(responseBody);
-        },
-        (rejectedReason) => {
-            logger.error(`ID token promise rejected: ${rejectedReason}`, {
-                correlationId: correlationId,
-            });
-            res.status(500).json({
-                message: `Token generation has failed due to an internal error. The logs may contain more info.`,
-            });
-        }
-    );
-};

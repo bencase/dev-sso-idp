@@ -30,6 +30,13 @@ const getDefaultEnvVarHolder = () => {
     envVarHolder.redirectUriOptionalForTokenEndpoint = 'false';
     envVarHolder.clientIdOptionalForTokenEndpoint = 'false';
     envVarHolder.enableRefreshTokens = 'true';
+    envVarHolder.excludeUserInfoFromIdToken = 'false';
+    envVarHolder.idTokenNameField = 'name';
+    envVarHolder.idTokenUsernameField = 'preferred_username';
+    envVarHolder.idTokenFirstNameField = 'given_name';
+    envVarHolder.idTokenMiddleNameField = 'middle_name';
+    envVarHolder.idTokenLastNameField = 'family_name';
+    envVarHolder.idTokenEmailField = 'email';
     envVarHolder.logLevel = 'info';
     envVarHolder.authorizePagePath = '/authorize';
     envVarHolder.settingsPagePath = '/settings';

@@ -19,6 +19,13 @@ import {
     INCLUDE_EXPIRES_IN_IN_TOKEN_RESPONSE_ENV_VAR,
     REDIRECT_URI_OPTIONAL_FOR_TOKEN_ENDPOINT_ENV_VAR,
     CLIENT_ID_OPTIONAL_FOR_TOKEN_ENDPOINT_ENV_VAR,
+    EXCLUDE_USER_INFO_FROM_ID_TOKEN_ENV_VAR,
+    ID_TOKEN_NAME_FIELD_ENV_VAR,
+    ID_TOKEN_USERNAME_FIELD_ENV_VAR,
+    ID_TOKEN_FIRST_NAME_FIELD_ENV_VAR,
+    ID_TOKEN_MIDDLE_NAME_FIELD_ENV_VAR,
+    ID_TOKEN_LAST_NAME_FIELD_ENV_VAR,
+    ID_TOKEN_EMAIL_FIELD_ENV_VAR,
     LOG_LEVEL_ENV_VAR,
     AUTHORIZE_PAGE_PATH_ENV_VAR,
     SETTINGS_PAGE_PATH_ENV_VAR,
@@ -54,6 +61,13 @@ defaultEnvVarHolder.includeExpiresInInTokenResponse = 'true';
 defaultEnvVarHolder.redirectUriOptionalForTokenEndpoint = 'false';
 defaultEnvVarHolder.clientIdOptionalForTokenEndpoint = 'false';
 defaultEnvVarHolder.enableRefreshTokens = 'true';
+defaultEnvVarHolder.excludeUserInfoFromIdToken = 'false';
+defaultEnvVarHolder.idTokenNameField = 'name';
+defaultEnvVarHolder.idTokenUsernameField = 'preferred_username';
+defaultEnvVarHolder.idTokenFirstNameField = 'given_name';
+defaultEnvVarHolder.idTokenMiddleNameField = 'middle_name';
+defaultEnvVarHolder.idTokenLastNameField = 'family_name';
+defaultEnvVarHolder.idTokenEmailField = 'email';
 defaultEnvVarHolder.logLevel = 'info';
 defaultEnvVarHolder.authorizePagePath = '/authorize';
 defaultEnvVarHolder.settingsPagePath = '/settings';
@@ -130,6 +144,27 @@ describe('src/envVarSummarizer.js', () => {
                 },
                 [ENABLE_REFRESH_TOKENS_ENV_VAR]: {
                     value: 'true',
+                },
+                [EXCLUDE_USER_INFO_FROM_ID_TOKEN_ENV_VAR]: {
+                    value: 'false',
+                },
+                [ID_TOKEN_NAME_FIELD_ENV_VAR]: {
+                    value: 'name',
+                },
+                [ID_TOKEN_USERNAME_FIELD_ENV_VAR]: {
+                    value: 'preferred_username',
+                },
+                [ID_TOKEN_FIRST_NAME_FIELD_ENV_VAR]: {
+                    value: 'given_name',
+                },
+                [ID_TOKEN_MIDDLE_NAME_FIELD_ENV_VAR]: {
+                    value: 'middle_name',
+                },
+                [ID_TOKEN_LAST_NAME_FIELD_ENV_VAR]: {
+                    value: 'family_name',
+                },
+                [ID_TOKEN_EMAIL_FIELD_ENV_VAR]: {
+                    value: 'email',
                 },
                 [LOG_LEVEL_ENV_VAR]: {
                     value: 'info',
@@ -249,6 +284,27 @@ describe('src/envVarSummarizer.js', () => {
                 },
                 [ENABLE_REFRESH_TOKENS_ENV_VAR]: {
                     value: 'true',
+                },
+                [EXCLUDE_USER_INFO_FROM_ID_TOKEN_ENV_VAR]: {
+                    value: 'false',
+                },
+                [ID_TOKEN_NAME_FIELD_ENV_VAR]: {
+                    value: 'name',
+                },
+                [ID_TOKEN_USERNAME_FIELD_ENV_VAR]: {
+                    value: 'preferred_username',
+                },
+                [ID_TOKEN_FIRST_NAME_FIELD_ENV_VAR]: {
+                    value: 'given_name',
+                },
+                [ID_TOKEN_MIDDLE_NAME_FIELD_ENV_VAR]: {
+                    value: 'middle_name',
+                },
+                [ID_TOKEN_LAST_NAME_FIELD_ENV_VAR]: {
+                    value: 'family_name',
+                },
+                [ID_TOKEN_EMAIL_FIELD_ENV_VAR]: {
+                    value: 'email',
                 },
                 [LOG_LEVEL_ENV_VAR]: {
                     value: 'info',
@@ -374,6 +430,27 @@ describe('src/envVarSummarizer.js', () => {
                 },
                 [ENABLE_REFRESH_TOKENS_ENV_VAR]: {
                     value: 'true',
+                },
+                [EXCLUDE_USER_INFO_FROM_ID_TOKEN_ENV_VAR]: {
+                    value: 'false',
+                },
+                [ID_TOKEN_NAME_FIELD_ENV_VAR]: {
+                    value: 'name',
+                },
+                [ID_TOKEN_USERNAME_FIELD_ENV_VAR]: {
+                    value: 'preferred_username',
+                },
+                [ID_TOKEN_FIRST_NAME_FIELD_ENV_VAR]: {
+                    value: 'given_name',
+                },
+                [ID_TOKEN_MIDDLE_NAME_FIELD_ENV_VAR]: {
+                    value: 'middle_name',
+                },
+                [ID_TOKEN_LAST_NAME_FIELD_ENV_VAR]: {
+                    value: 'family_name',
+                },
+                [ID_TOKEN_EMAIL_FIELD_ENV_VAR]: {
+                    value: 'email',
                 },
                 [LOG_LEVEL_ENV_VAR]: {
                     value: 'info',

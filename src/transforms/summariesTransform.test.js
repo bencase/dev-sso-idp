@@ -30,6 +30,13 @@ import {
     HEALTH_CHECK_ENDPOINT_PATH_ENV_VAR,
     HEALTH_CHECK_ENV_ENDPOINT_PATH_ENV_VAR,
     ENABLE_REFRESH_TOKENS_ENV_VAR,
+    EXCLUDE_USER_INFO_FROM_ID_TOKEN_ENV_VAR,
+    ID_TOKEN_NAME_FIELD_ENV_VAR,
+    ID_TOKEN_USERNAME_FIELD_ENV_VAR,
+    ID_TOKEN_FIRST_NAME_FIELD_ENV_VAR,
+    ID_TOKEN_MIDDLE_NAME_FIELD_ENV_VAR,
+    ID_TOKEN_LAST_NAME_FIELD_ENV_VAR,
+    ID_TOKEN_EMAIL_FIELD_ENV_VAR,
 } from '../constants.js';
 import { createSummariesTransform } from './summariesTransform';
 
@@ -176,6 +183,27 @@ const envVarsSummary = {
         },
         [ENABLE_REFRESH_TOKENS_ENV_VAR]: {
             value: 'true',
+        },
+        [EXCLUDE_USER_INFO_FROM_ID_TOKEN_ENV_VAR]: {
+            value: 'false',
+        },
+        [ID_TOKEN_NAME_FIELD_ENV_VAR]: {
+            value: 'name',
+        },
+        [ID_TOKEN_USERNAME_FIELD_ENV_VAR]: {
+            value: 'preferred_username',
+        },
+        [ID_TOKEN_FIRST_NAME_FIELD_ENV_VAR]: {
+            value: 'given_name',
+        },
+        [ID_TOKEN_MIDDLE_NAME_FIELD_ENV_VAR]: {
+            value: 'middle_name',
+        },
+        [ID_TOKEN_LAST_NAME_FIELD_ENV_VAR]: {
+            value: 'family_name',
+        },
+        [ID_TOKEN_EMAIL_FIELD_ENV_VAR]: {
+            value: 'email',
         },
         [LOG_LEVEL_ENV_VAR]: {
             value: 'info',
@@ -347,6 +375,48 @@ const expectedHtml = `<html>
                 <div>
                     <div class="summaryEnvVarName">DEVSSOIDP_ENABLE_REFRESH_TOKENS</div>
                     <div class="summaryEnvVarValue ml2rem">true</div>
+                </div>
+            </div>
+            <div class="summary summaryNormal flexLeftAlignedColumn">
+                <div>
+                    <div class="summaryEnvVarName">DEVSSOIDP_EXCLUDE_USER_INFO_FROM_ID_TOKEN</div>
+                    <div class="summaryEnvVarValue ml2rem">false</div>
+                </div>
+            </div>
+            <div class="summary summaryNormal flexLeftAlignedColumn">
+                <div>
+                    <div class="summaryEnvVarName">DEVSSOIDP_ID_TOKEN_NAME_FIELD</div>
+                    <div class="summaryEnvVarValue ml2rem">name</div>
+                </div>
+            </div>
+            <div class="summary summaryNormal flexLeftAlignedColumn">
+                <div>
+                    <div class="summaryEnvVarName">DEVSSOIDP_ID_TOKEN_USERNAME_FIELD</div>
+                    <div class="summaryEnvVarValue ml2rem">preferred_username</div>
+                </div>
+            </div>
+            <div class="summary summaryNormal flexLeftAlignedColumn">
+                <div>
+                    <div class="summaryEnvVarName">DEVSSOIDP_ID_TOKEN_FIRST_NAME_FIELD</div>
+                    <div class="summaryEnvVarValue ml2rem">given_name</div>
+                </div>
+            </div>
+            <div class="summary summaryNormal flexLeftAlignedColumn">
+                <div>
+                    <div class="summaryEnvVarName">DEVSSOIDP_ID_TOKEN_MIDDLE_NAME_FIELD</div>
+                    <div class="summaryEnvVarValue ml2rem">middle_name</div>
+                </div>
+            </div>
+            <div class="summary summaryNormal flexLeftAlignedColumn">
+                <div>
+                    <div class="summaryEnvVarName">DEVSSOIDP_ID_TOKEN_LAST_NAME_FIELD</div>
+                    <div class="summaryEnvVarValue ml2rem">family_name</div>
+                </div>
+            </div>
+            <div class="summary summaryNormal flexLeftAlignedColumn">
+                <div>
+                    <div class="summaryEnvVarName">DEVSSOIDP_ID_TOKEN_EMAIL_FIELD</div>
+                    <div class="summaryEnvVarValue ml2rem">email</div>
                 </div>
             </div>
             <div class="summary summaryNormal flexLeftAlignedColumn">

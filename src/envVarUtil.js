@@ -27,6 +27,13 @@ import {
     HEALTH_CHECK_ENDPOINT_PATH_ENV_VAR,
     HEALTH_CHECK_ENV_ENDPOINT_PATH_ENV_VAR,
     ENABLE_REFRESH_TOKENS_ENV_VAR,
+    EXCLUDE_USER_INFO_FROM_ID_TOKEN_ENV_VAR,
+    ID_TOKEN_NAME_FIELD_ENV_VAR,
+    ID_TOKEN_USERNAME_FIELD_ENV_VAR,
+    ID_TOKEN_FIRST_NAME_FIELD_ENV_VAR,
+    ID_TOKEN_MIDDLE_NAME_FIELD_ENV_VAR,
+    ID_TOKEN_LAST_NAME_FIELD_ENV_VAR,
+    ID_TOKEN_EMAIL_FIELD_ENV_VAR,
 } from './constants.js';
 import { EnvVarHolder } from './validateEnvVars.js';
 
@@ -62,6 +69,18 @@ export const getEnvVarHolder = () => {
     evHolder.clientIdOptionalForTokenEndpoint =
         process.env[CLIENT_ID_OPTIONAL_FOR_TOKEN_ENDPOINT_ENV_VAR];
     evHolder.enableRefreshTokens = process.env[ENABLE_REFRESH_TOKENS_ENV_VAR];
+    evHolder.excludeUserInfoFromIdToken =
+        process.env[EXCLUDE_USER_INFO_FROM_ID_TOKEN_ENV_VAR];
+    evHolder.idTokenNameField = process.env[ID_TOKEN_NAME_FIELD_ENV_VAR];
+    evHolder.idTokenUsernameField =
+        process.env[ID_TOKEN_USERNAME_FIELD_ENV_VAR];
+    evHolder.idTokenFirstNameField =
+        process.env[ID_TOKEN_FIRST_NAME_FIELD_ENV_VAR];
+    evHolder.idTokenMiddleNameField =
+        process.env[ID_TOKEN_MIDDLE_NAME_FIELD_ENV_VAR];
+    evHolder.idTokenLastNameField =
+        process.env[ID_TOKEN_LAST_NAME_FIELD_ENV_VAR];
+    evHolder.idTokenEmailField = process.env[ID_TOKEN_EMAIL_FIELD_ENV_VAR];
     evHolder.logLevel = process.env[LOG_LEVEL_ENV_VAR];
     evHolder.authorizePagePath = process.env[AUTHORIZE_PAGE_PATH_ENV_VAR];
     evHolder.settingsPagePath = process.env[SETTINGS_PAGE_PATH_ENV_VAR];

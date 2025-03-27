@@ -35,6 +35,13 @@ export class EnvVarHolder {
     redirectUriOptionalForTokenEndpoint;
     clientIdOptionalForTokenEndpoint;
     enableRefreshTokens;
+    excludeUserInfoFromIdToken;
+    idTokenNameField;
+    idTokenUsernameField;
+    idTokenFirstNameField;
+    idTokenMiddleNameField;
+    idTokenLastNameField;
+    idTokenEmailField;
     logLevel;
     authorizePagePath;
     settingsPagePath;

@@ -151,11 +151,11 @@ A successful response will include the access token, the ID token, and some othe
 
 ```JSON
 {
-    "access_token": "H2LkTDZvIImckQQrAkOSeF8z0366OQQk4gHnNsUwNEg2In89viMnAy00YZ7SaZnEVxnTc=",
+    "access_token": "e2yVtH42lNngt63oCGIsVMs+03JtWJRPYDeuVZ8fKv6mufFCk7IY8ev4Q4M+31uyipThI=",
     "token_type": "Bearer",
     "expires_in": 14400,
-    "refresh_token": "PFTxHHlZEi8ZiorEnI/Q+GPe035n4+B4979dAGucf3GC/I3efSk/W/T/z+cjo82GY6Znw=",
-    "id_token": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MzgyNjY3MDIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCIsImF1ZCI6InJlbHlpbmdfcGFydHkiLCJzdWIiOiJ0dXNlciIsImV4cCI6MTczODI4MTEwMn0.n1424ax1Jpjxw-kIqPXVUWNz1pVywaIlCXMMoh18rkc"
+    "refresh_token": "TQva9ty+BSpzYQdYnNyZJWwO03ToNn+jyHJYnYprlRjMcNByU746mPSs96tPCKlWv+5Xg=",
+    "id_token": "eyJhbGciOiJIUzI1NiJ9.eyJ1cm46ZHVtbXlzc29pZHA6Y2xhaW0iOnRydWUsIm5hbWUiOiJUZXN0IFVzZXIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ0dXNlciIsImdpdmVuX25hbWUiOiJUZXN0IiwibWlkZGxlX25hbWUiOiJFbSIsImZhbWlseV9uYW1lIjoiVXNlciIsImlhdCI6MTc0MzA5NzI4MywiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDozMDAwIiwiYXVkIjoicmVseWluZ19wYXJ0eSIsInN1YiI6InR1c2VyIiwiZXhwIjoxNzQzMTExNjgzfQ.UthMkTsevpC_kEs3karJ5MXRIn9RjM1lT1_05jrxi0w"
 }
 ```
 
@@ -341,6 +341,13 @@ Note that the value of `grant_type` is `refresh_token`, and there's a new `refre
 -   **`DEVSSOIDP_REDIRECT_URI_OPTIONAL_FOR_TOKEN_ENDPOINT`:** (`false`) The default behavior of the token endpoint is to check the `redirect_uri` field of the request body, and require that it be the same as was used in the `redirect_uri` request parameter of the authorize page, as per the OAuth 2.0 specification. This check will be ignored if this variable's value is `true`.
 -   **`DEVSSOIDP_CLIENT_ID_OPTIONAL_FOR_TOKEN_ENDPOINT`:** (`false`) If not using basic authentication (i.e. if `DEVSSOIDP_CLIENT_IDS` is used instead of `DEVSSOIDP_CLIENT_IDS_WITH_SECRETS`), the default behavior of the token endpoint is to check the `client_id` field of the request body, and require that it be the same as was used in the `client_id` request parameter of the authorize page, as per the OAuth 2.0 specification. This check will be ignored if this variable's value is `true`.
 -   **`DEVSSOIDP_ENABLE_REFRESH_TOKENS`:** (`true`) Whether a refresh token is provided in the response body of the token endpoint.
+-   **`DEVSSOIDP_EXCLUDE_USER_INFO_FROM_ID_TOKEN`:** (`false`) The ID token includes some user info by default. If this is set to `true`, user info will be omitted from the ID token, regardless of scopes.
+-   **`DEVSSOIDP_ID_TOKEN_NAME_FIELD`:** (`name`) The field name in the ID token for the user's full name.
+-   **`DEVSSOIDP_ID_TOKEN_USERNAME_FIELD`:** (`preferred_username`) The field name in the ID token for the user's username.
+-   **`DEVSSOIDP_ID_TOKEN_FIRST_NAME_FIELD`:** (`given_name`) The field name in the ID token for the user's first name.
+-   **`DEVSSOIDP_ID_TOKEN_MIDDLE_NAME_FIELD`:** (`middle_name`) The field name in the ID token for the user's middle name.
+-   **`DEVSSOIDP_ID_TOKEN_LAST_NAME_FIELD`:** (`family_name`) The field name in the ID token for the user's last name.
+-   **`DEVSSOIDP_ID_TOKEN_EMAIL_FIELD`:** (`email`) The field name in the ID token for the user's email address.
 -   **`DEVSSOIDP_LOG_LEVEL`:** (`info`) The log level used by this server. `info` is reasonably verbose. Logs can be restricted to only warnings and errors by using the `warn` level, and only errors by using the `error` level.
 -   **`DEVSSOIDP_AUTHORIZE_PAGE_PATH`:** (`/authorize`) The path at which this server will expose the authorize page.
 -   **`DEVSSOIDP_SETTINGS_PAGE_PATH`:** (`/settings`) The path at which this server will expose a page for changing browser-specific settings.
@@ -359,6 +366,5 @@ In case of errors, endpoints will return a message explaining the error, or Dev 
 
 The below features are on my radar regarding potential inclusion into Dev SSO IdP:
 
--   **Options for adding user info into ID token.** This is not part of the OIDC specification, but is provided as extended functionality by many implementations of it, and is often depended upon by client applications. I would like to add this capability into Dev SSO IdP but can't provide a timeline at this time.
 -   **Verification of PKCE codes.** Currently, requests that provide PKCE code challenges and verifiers will work, but Dev SSO IdP will not fail if a verifier doesn't match a previously supplied challenge, and so it can't alert you to problems in your application related to PKCE flows.
 -   **Implicit flow.** [This is a bad practice](https://datatracker.ietf.org/doc/html/rfc9700#section-2.1.2), but it's supported by the OIDC specification, and so if there's an overwhelming desire for it I may consider adding it.
